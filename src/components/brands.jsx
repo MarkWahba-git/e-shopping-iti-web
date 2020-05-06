@@ -1,10 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Brands extends Component {
-    state = {  }
-    render() { 
-        return ;
-    }
+  state = {
+    brands: ["All brands", "Brnad 1", "Brnad 2", "Brnad 3"],
+  };
+  render() {
+    const { brands } = this.state;
+    const { currentBrand, onBrandClick } = this.props;
+    return (
+      <ul
+        className="list-group"
+        style={{
+          cursor: "pointer",
+        }}
+      >
+        {brands.map((brand) => (
+          <li
+            key={brand}
+            className={this.formateBrandClass(currentBrand, brand)}
+            onClick={()=>onBrandClick(brand)}
+          >
+            {brand}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  formateBrandClass(currentBrand, Brand) {
+    let cls = "list-group-item";
+    return (cls += currentBrand === Brand ? " active" : "");
+  }
 }
- 
+
 export default Brands;

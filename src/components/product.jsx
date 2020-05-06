@@ -15,13 +15,14 @@ class Product extends Component {
   };
   render() {
     return(
-        <div className="card my-4" style={{width: 250}}>
+        <div className="card my-3" style={{width: 250}}>
           <img className="card-img-top" src={this.state.product.images} alt="Card image cap"/>
           <div className="card-body">
             <h5 className="card-title">Card title</h5>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" className="btn btn-primary">View</a>
-            <a href="#" className="btn btn-danger mx-3">Add</a>
+            <a href="#" className="btn btn-secondary mx-1">View</a>
+            <a href="#" className="btn btn-primary mx-1">Add</a>
+            <a href="#" className="btn btn-danger mx-1">Del</a>
           </div>
         </div>
         );
