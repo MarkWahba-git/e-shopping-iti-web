@@ -1,17 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, useLayoutEffect } from "react";
 import Product from "./product";
 import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
 import Categories from "./categories";
 import Brands from "./brands";
+import Search from "./search";
+import { productFilter } from "../utils/filter-product";
+import { getProducts } from "../servicies/fakeProducts";
 
 class Products extends Component {
   state = {
-    products: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    products: getProducts(),
     pageSize: 6,
     currentPage: 1,
     currentCategory: "All Categories",
-    currentBrand: "All brands",
+    currentBrand: "All Brands",
   };
 
   handlePageChannge = (page) => {
@@ -20,11 +23,11 @@ class Products extends Component {
   };
 
   handleCategoryClick = (category) => {
-    this.setState({ currentCategory: category });
+    this.setState({ currentCategory: category , currentPage :1});
   };
 
   handleBrandClick = (brand) => {
-    this.setState({ currentBrand: brand });
+    this.setState({ currentBrand: brand , currentPage :1});
   };
   render() {
     const {
@@ -34,10 +37,32 @@ class Products extends Component {
       currentCategory,
       currentBrand,
     } = this.state;
+
+    const filterdProducts = productFilter(
+      products,
+      currentCategory,
+      currentBrand,
+      currentPage
+    );
+
     return (
       <div className="container-fluid">
         <div className="row">
+          <div className="col-9">
+            <div className="row">
+              {paginate(currentPage, pageSize, filterdProducts).map(
+                (product) => (
+                  <div key={product.id} className="col-4">
+                    <Product productId={product.id} product={product} />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
           <div className="col-3">
+            <div>
+              <Search></Search>
+            </div>
             <div className="my-4">
               {" "}
               <Categories
@@ -53,19 +78,10 @@ class Products extends Component {
               />
             </div>
           </div>
-          <div className="col">
-            <div className="row">
-              {paginate(currentPage, pageSize, products).map((p) => (
-                <div key={p} className="col-4">
-                  <Product></Product>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
         <div className="row justify-content-center">
           <Pagination
-            productsCount={products.length}
+            productsCount={filterdProducts.length}
             pageSize={pageSize}
             onPageChange={this.handlePageChannge}
             currentPage={currentPage}

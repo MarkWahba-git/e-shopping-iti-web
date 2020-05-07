@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Brands extends Component {
   state = {
-    brands: ["All brands", "Brnad 1", "Brnad 2", "Brnad 3"],
+    brands: ["All Brands", "Brand 1", "Brand 2", "Brand 3"],
   };
   render() {
     const { brands } = this.state;

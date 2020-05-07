@@ -11,6 +11,7 @@ class Pagination extends Component {
     if (pagesCount <= 1) return null;
     return (
       <nav
+        className="mt-5"
         aria-label="Page navigation example"
         style={{
           cursor: "pointer",
