@@ -8,6 +8,7 @@ import Search from "./search";
 import { productFilter } from "../utils/filter-product";
 import { getProducts } from "../servicies/fakeProducts";
 import { sortProducts } from "../utils/sortProducts";
+import SortBy from "./sortby";
 
 class Products extends Component {
   state = {
@@ -16,6 +17,7 @@ class Products extends Component {
     currentPage: 1,
     currentCategory: "All Categories",
     currentBrand: "All Brands",
+    sortBy: { element: "Title", order: "asc" },
   };
 
   handlePageChannge = (page) => {
@@ -37,6 +39,7 @@ class Products extends Component {
       currentPage,
       currentCategory,
       currentBrand,
+      sortBy,
     } = this.state;
 
     const filterdProducts = productFilter(
@@ -46,23 +49,27 @@ class Products extends Component {
       currentPage
     );
 
+    const sortedProduct = sortProducts(
+      filterdProducts,
+      sortBy.element,
+      sortBy.order
+    );
+
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-9">
             <div className="row">
-              {paginate(currentPage, pageSize, filterdProducts).map(
-                (product) => (
-                  <div key={product.id} className="col-4">
-                    <Product productId={product.id} product={product} />
-                  </div>
-                )
-              )}
+              {paginate(currentPage, pageSize, sortedProduct).map((product) => (
+                <div key={product.id} className="col-4">
+                  <Product productId={product.id} product={product} />
+                </div>
+              ))}
             </div>
           </div>
           <div className="col-3">
             <div>
-              <Search></Search>
+              <SortBy />
             </div>
             <div className="my-4">
               {" "}
@@ -82,7 +89,7 @@ class Products extends Component {
         </div>
         <div className="row justify-content-center">
           <Pagination
-            productsCount={filterdProducts.length}
+            productsCount={sortedProduct.length}
             pageSize={pageSize}
             onPageChange={this.handlePageChannge}
             currentPage={currentPage}

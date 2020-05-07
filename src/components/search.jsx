@@ -4,7 +4,7 @@ class Search extends Component {
   state = {};
   render() {
     return (
-      <form className="form-inline mt-5">
+      <form className="form-inline mt-3">
         <input
           className="form-control mr-sm-2"
           type="search"
