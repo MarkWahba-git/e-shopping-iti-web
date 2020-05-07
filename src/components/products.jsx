@@ -23,11 +23,11 @@ class Products extends Component {
   };
 
   handleCategoryClick = (category) => {
-    this.setState({ currentCategory: category , currentPage :1});
+    this.setState({ currentCategory: category, currentPage: 1 });
   };
 
   handleBrandClick = (brand) => {
-    this.setState({ currentBrand: brand , currentPage :1});
+    this.setState({ currentBrand: brand, currentPage: 1 });
   };
   render() {
     const {

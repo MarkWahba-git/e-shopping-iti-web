@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Products from "./components/products";
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
+import Header from "./components/header";
 
 class App extends Component {
   state = {};
@@ -8,7 +10,9 @@ class App extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <Products />;
+        <Header/>
+        <Products />
+        <Footer/>
       </React.Fragment>
     );
   }
