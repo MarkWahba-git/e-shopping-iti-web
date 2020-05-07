@@ -7,6 +7,7 @@ import Brands from "./brands";
 import Search from "./search";
 import { productFilter } from "../utils/filter-product";
 import { getProducts } from "../servicies/fakeProducts";
+import { sortProducts } from "../utils/sortProducts";
 
 class Products extends Component {
   state = {
