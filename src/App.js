@@ -8,7 +8,18 @@ import ShoppingCart from "./components/shopping-cart";
 import NotFound from "./components/not-found";
 
 class App extends Component {
-  state = {};
+  state = { products: [] };
+
+  handleProductAdd = (product) => {
+    let products = [...this.state.products, product];
+    this.setState({ products });
+  };
+
+  handleClearCart = ()=>{
+    let products = []
+    this.setState({ products });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -16,9 +27,21 @@ class App extends Component {
         <Header />
         <div className="content">
           <Switch>
-            <Route path="/cart" exact component={ShoppingCart}></Route>
-            <Route path="/products" exact component={Products}></Route>
-            <Route path="/notFound" exact component={NotFound}></Route>
+            <Route
+              path="/cart"
+              exact
+              render={(props) => (
+                <ShoppingCart {...props} products={this.state.products} onClearCart={this.handleClearCart} />
+              )}
+            />
+            <Route
+              path="/products"
+              exact
+              render={(props) => (
+                <Products {...props} onProductadd={this.handleProductAdd} />
+              )}
+            />
+            <Route path="/notFound" exact component={NotFound} />
             <Redirect from="/" to="/products" />
             <Redirect to="/notFound" />
           </Switch>

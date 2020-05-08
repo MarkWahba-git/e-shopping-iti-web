@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Categories extends Component {
   state = {
     categories: ["All Categories", "Odd Categories", "Even categories"],
   };
+
+  // async componentDidMount() {
+  //   const { categories } = await axios.get();
+  //   this.setState({ categories });
+  // }
   render() {
     const { categories } = this.state;
     const { onCategoryClick, currentCategory } = this.props;

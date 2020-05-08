@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Brands extends Component {
   state = {
     brands: ["All Brands", "Brand 1", "Brand 2", "Brand 3"],
   };
+
+  // async componentDidMount() {
+  //   const { data: brands } = await axios.get();
+  //   this.setState({ brands });
+  // }
   render() {
     const { brands } = this.state;
     const { currentBrand, onBrandClick } = this.props;
@@ -18,7 +24,7 @@ class Brands extends Component {
           <li
             key={brand}
             className={this.formateBrandClass(currentBrand, brand)}
-            onClick={()=>onBrandClick(brand)}
+            onClick={() => onBrandClick(brand)}
           >
             {brand}
           </li>

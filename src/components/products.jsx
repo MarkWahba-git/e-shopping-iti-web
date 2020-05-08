@@ -9,6 +9,7 @@ import { productFilter } from "../utils/filter-product";
 import { getProducts } from "../servicies/fakeProducts";
 import { sortProducts } from "../utils/sortProducts";
 import SortBy from "./sortby";
+import axios from "axios";
 
 class Products extends Component {
   state = {
@@ -19,6 +20,11 @@ class Products extends Component {
     currentBrand: "All Brands",
     sortBy: { element: "Title", order: "asc" },
   };
+
+  // async componentDidMount() {
+  //   const { data : products } = await axios.get();
+  //   this.setState({ products });
+  // }
 
   handlePageChannge = (page) => {
     this.setState({ currentPage: page });
@@ -32,6 +38,8 @@ class Products extends Component {
   handleBrandClick = (brand) => {
     this.setState({ currentBrand: brand, currentPage: 1 });
   };
+
+
   render() {
     const {
       products,
@@ -54,6 +62,8 @@ class Products extends Component {
       sortBy.element,
       sortBy.order
     );
+    console.log("props", this.props);
+    
 
     return (
       <div className="container-fluid">
@@ -62,7 +72,10 @@ class Products extends Component {
             <div className="row">
               {paginate(currentPage, pageSize, sortedProduct).map((product) => (
                 <div key={product.id} className="col-4">
-                  <Product productId={product.id} product={product} />
+                  <Product
+                    onProductAdd={()=>this.props.onProductadd(product)}
+                    product={product}
+                  />
                 </div>
               ))}
             </div>
