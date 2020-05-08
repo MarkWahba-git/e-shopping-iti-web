@@ -15,15 +15,15 @@ class App extends Component {
     this.setState({ products });
   };
 
-  handleClearCart = ()=>{
-    let products = []
+  handleClearCart = () => {
+    let products = [];
     this.setState({ products });
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
-        <Navbar />
+        <Navbar productsCount={this.state.products.length} />
         <Header />
         <div className="content">
           <Switch>
@@ -31,7 +31,11 @@ class App extends Component {
               path="/cart"
               exact
               render={(props) => (
-                <ShoppingCart {...props} products={this.state.products} onClearCart={this.handleClearCart} />
+                <ShoppingCart
+                  {...props}
+                  products={this.state.products}
+                  onClearCart={this.handleClearCart}
+                />
               )}
             />
             <Route
