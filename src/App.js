@@ -6,6 +6,11 @@ import Header from "./components/header";
 import { Route, Redirect, Switch } from "react-router-dom";
 import ShoppingCart from "./components/shopping-cart";
 import NotFound from "./components/not-found";
+import LogIn from './components/login';
+import Register from './components/register';
+import AddProduct from './components/add-product';
+import AddBrand from "./components/add-brand";
+import AddCategory from './components/add-category';
 
 class App extends Component {
   state = { products: [] };
@@ -46,6 +51,11 @@ class App extends Component {
               )}
             />
             <Route path="/notFound" exact component={NotFound} />
+            <Route path="/add/product" exact component={AddProduct} />
+            <Route path="/add/brand" exact component={AddBrand} />
+            <Route path="/add/category" exact component={AddCategory} />
+            <Route path="/login" exact component={LogIn} />
+            <Route path="/register" exact component={Register} />
             <Redirect from="/" to="/products" />
             <Redirect to="/notFound" />
           </Switch>

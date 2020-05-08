@@ -62,7 +62,6 @@ class Products extends Component {
       sortBy.element,
       sortBy.order
     );
-    console.log("props", this.props);
     
 
     return (
