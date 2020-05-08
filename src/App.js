@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import Products from "./components/products";
+import Products from "./components/products/products";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import { Route, Redirect, Switch } from "react-router-dom";
 import ShoppingCart from "./components/shopping-cart";
 import NotFound from "./components/not-found";
-import LogIn from './components/login';
-import Register from './components/register';
-import AddProduct from './components/add-product';
-import AddBrand from "./components/add-brand";
-import AddCategory from './components/add-category';
+import LogIn from "./components/authentication/login";
+import Register from "./components/authentication/register";
+import AddProduct from "./components/products/add-product";
+import AddBrand from "./components/brands/add-brand";
+import AddCategory from "./components/categories/add-category";
 
 class App extends Component {
   state = { products: [] };

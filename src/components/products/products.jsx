@@ -1,14 +1,14 @@
 import React, { Component, useLayoutEffect } from "react";
 import Product from "./product";
-import Pagination from "./pagination";
-import { paginate } from "../utils/paginate";
-import Categories from "./categories";
-import Brands from "./brands";
-import Search from "./search";
-import { productFilter } from "../utils/filter-product";
-import { getProducts } from "../servicies/fakeProducts";
-import { sortProducts } from "../utils/sortProducts";
-import SortBy from "./sortby";
+import Pagination from "../pagination";
+import { paginate } from "../../utils/paginate";
+import Categories from "../categories/categories";
+import Brands from "../brands/brands";
+import Search from "../search";
+import { productFilter } from "../../utils/filter-product";
+import { getProducts } from "../../servicies/fakeProducts";
+import { sortProducts } from "../../utils/sortProducts";
+import SortBy from "../sortby";
 import axios from "axios";
 
 class Products extends Component {
