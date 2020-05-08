@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getProduct } from "../servicies/fakeProducts";
+import { Route, Link } from "react-router-dom";
+import ProductDetails from "./product-details";
 
 class Product extends Component {
   render() {
@@ -14,6 +15,7 @@ class Product extends Component {
       category,
       brand,
     } = this.props.product;
+
     return (
       <div className="card ml-5 mt-5" style={{ width: 250 }}>
         <img className="card-img-top" src={images} alt="Card image cap" />
@@ -23,9 +25,20 @@ class Product extends Component {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <a href="#" className="btn btn-secondary mx-1">
+          <Route
+            path="/product/:id"
+            exact
+            render={(props) => (
+              <ProductDetails {...props} product={this.props.product} />
+            )}
+          ></Route>
+          <Link
+            to={`/product/${id}`}
+            info={this.props.product}
+            className="btn btn-secondary mx-1"
+          >
             View
-          </a>
+          </Link>
           <a href="#" className="btn btn-primary mx-1">
             Add
           </a>

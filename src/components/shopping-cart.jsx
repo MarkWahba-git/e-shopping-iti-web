@@ -7,7 +7,7 @@ class ShoppingCart extends Component {
         <div className="container">
 
       <div className="card">
-        <div className="card-header">Featured</div>
+        <div className="card-header">Shopping Cart</div>
         <div className="card-body">
           <h5 className="card-title">Special title treatment</h5>
           <p className="card-text">
@@ -15,7 +15,7 @@ class ShoppingCart extends Component {
             content.
           </p>
           <a href="#" className="btn btn-primary">
-            Go somewhere
+            check out
           </a>
         </div>
       </div>
