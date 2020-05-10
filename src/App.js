@@ -17,6 +17,7 @@ class App extends Component {
 
   handleProductAdd = (product) => {
     let products = [...this.state.products, product];
+    
     this.setState({ products });
   };
 
