@@ -7,7 +7,7 @@ class Navbar extends Component {
   render() {
     return (
       <React.Fragment>
-        <nav className="navbar navbar-light bg-light justify-content-between">
+        <nav className="navbar navbar-light bg-light">
           <NavLink to="/" className="navbar-brand">
             Home
           </NavLink>
@@ -20,14 +20,12 @@ class Navbar extends Component {
               ShoppingCart
             </NavLink>
           </div>
-          <div>
-            <NavLink to="/login" className="mx-1">
-              Login
-            </NavLink>
-            <NavLink to="/register" className="mx-1">
-              Register
-            </NavLink>
-          </div>
+          <NavLink to="/login" className="nav-item nav-link">
+            Login
+          </NavLink>
+          <NavLink to="/register" className="nav-item nav-link">
+            Register
+          </NavLink>
         </nav>
       </React.Fragment>
     );
