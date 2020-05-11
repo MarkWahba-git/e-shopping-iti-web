@@ -16,7 +16,7 @@ code {
 
 /* ---------- Header ----------*/
 .header{
-  height: 600px;
+  height: 300px;
   background-image: url('./images/background1.PNG');
   background-repeat: no-repeat;
   background-position: center center;

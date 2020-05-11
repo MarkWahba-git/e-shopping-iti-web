@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import getCategories from "../../servicies/categoriesService";
 
 class Categories extends Component {
   state = {
@@ -7,7 +7,9 @@ class Categories extends Component {
   };
 
   // async componentDidMount() {
-  //   const { categories } = await axios.get();
+  //   const categories = ["All Categories"];
+  //   const { data } = await getCategoris();;
+  //   for (let category of categories) categories.push(category);
   //   this.setState({ categories });
   // }
   render() {

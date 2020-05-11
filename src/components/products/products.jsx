@@ -7,9 +7,10 @@ import Brands from "../brands/brands";
 import Search from "../search";
 import { productFilter } from "../../utils/filter-product";
 import { getProducts } from "../../servicies/fakeProducts";
+// import { getProducts } from "../../servicies/serviceProducts";
 import { sortProducts } from "../../utils/sortProducts";
 import SortBy from "../sortby";
-import axios from "axios";
+import http from "../../servicies/httpService"
 
 class Products extends Component {
   state = {
@@ -22,7 +23,7 @@ class Products extends Component {
   };
 
   // async componentDidMount() {
-  //   const { data : products } = await axios.get();
+  //   const { data: products } = await geProducts();
   //   this.setState({ products });
   // }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import http from "../../servicies/httpService";
 
 class Brands extends Component {
   state = {
@@ -7,7 +7,8 @@ class Brands extends Component {
   };
 
   // async componentDidMount() {
-  //   const { data: brands } = await axios.get();
+  //   const { data } = await http.get();
+  //   const brands = {{id : "", name :"All Brands"} , ...data}
   //   this.setState({ brands });
   // }
   render() {

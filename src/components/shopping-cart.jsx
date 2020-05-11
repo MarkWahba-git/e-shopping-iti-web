@@ -20,7 +20,7 @@ class ShoppingCart extends Component {
                       {product.Title}
                     </div>
                     <div className="col-2">
-                      {product.count} x{product.count * product.price}
+                      {product.count} x {product.price}
                     </div>
                   </div>
                   <hr />

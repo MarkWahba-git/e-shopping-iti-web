@@ -1,62 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
 import Input from "./../common/input";
+import { register } from "../../servicies/usersService";
+import Form from "./../common/form";
+import Joi from "joi-browser";
 
-class Register extends Component {
+class Register extends Form {
   state = {
-    account: { username: "", email: "", password: "", confirmpassword: "" },
+    data: { name: "", email: "", password: "", confirmPassword:"" },
     errors: {},
   };
 
-  handleChange = ({ currentTarget: input }) => {
-    const account = { ...this.state };
-    account[input.name] = input.value;
-    this.setState({ account });
+  schema = {
+    name: Joi.string().required().label("Username"),
+    email: Joi.string().required().label("email"),
+    password: Joi.string().required().min(5).label("Password"),
+    confirmPassword: Joi.string().required().label("ConfirmPassword"),
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Registered !   ");
-  };
+  doSubmit(){
+    console.log("registerd");
+    
+  }
 
   render() {
-    const { account, errors } = this.state;
+    const { data, errors } = this.state;
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
-          <Input
-            name="username"
-            value={account.username}
-            onChange={this.handleChange}
-            label="UserName"
-            error={errors.username}
-          />
-          <Input
-            name="email"
-            value={account.email}
-            onChange={this.handleChange}
-            label="Email"
-            type="email"
-            error={errors.email}
-          />
-          <Input
-            name="password"
-            value={account.password}
-            onChange={this.handleChange}
-            label="Password"
-            type="password"
-            error={errors.password}
-          />
-          <Input
-            name="confirmpassword"
-            value={account.confirmpassword}
-            onChange={this.handleChange}
-            label="ConfirmPassword"
-            type="password"
-            error={errors.confirmpassword}
-          />
-          <button type="submit" className="btn btn-primary">
-            Register
-          </button>
+          {this.renderInput("name", "UserName")}
+          {this.renderInput("email", "Email", "email")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderInput("confirmPassword", "Confirm Password", "password")}
+          {this.renderButton("Register")}
         </form>
       </div>
     );
