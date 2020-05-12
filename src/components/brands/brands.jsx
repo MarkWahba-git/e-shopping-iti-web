@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import http from "../../servicies/httpService";
+import { getBrands } from './../../servicies/brandsService';
 
 class Brands extends Component {
   state = {
-    brands: ["All Brands", "Brand 1", "Brand 2", "Brand 3"],
+    brands: ["All Brands"],
   };
 
-  // async componentDidMount() {
-  //   const { data } = await http.get();
-  //   const brands = {{id : "", name :"All Brands"} , ...data}
-  //   this.setState({ brands });
-  // }
+
+  async componentDidMount() {
+    const brands = ["All Brands"];
+    const response = await getBrands();
+    for (let brand of response.data.data) brands.push(brand.brand_name);    
+    this.setState({ brands });
+  }
+
   render() {
     const { brands } = this.state;
     const { currentBrand, onBrandClick } = this.props;

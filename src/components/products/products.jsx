@@ -6,15 +6,16 @@ import Categories from "../categories/categories";
 import Brands from "../brands/brands";
 import Search from "../search";
 import { productFilter } from "../../utils/filter-product";
-import { getProducts } from "../../servicies/fakeProducts";
-// import { getProducts } from "../../servicies/serviceProducts";
+import { getZ } from "../../servicies/productsService";
 import { sortProducts } from "../../utils/sortProducts";
 import SortBy from "../sortby";
-import http from "../../servicies/httpService"
+import http from "../../servicies/httpService";
+import { Link } from "react-router-dom";
+
 
 class Products extends Component {
   state = {
-    products: getProducts(),
+    products: [],
     pageSize: 6,
     currentPage: 1,
     currentCategory: "All Categories",
@@ -22,10 +23,12 @@ class Products extends Component {
     sortBy: { element: "Title", order: "asc" },
   };
 
-  // async componentDidMount() {
-  //   const { data: products } = await geProducts();
-  //   this.setState({ products });
-  // }
+  async componentDidMount() {
+    const { data: products } = await getZ();
+    console.log("getting the products from the server", products);
+
+    this.setState({ products });
+  }
 
   handlePageChannge = (page) => {
     this.setState({ currentPage: page });
@@ -39,7 +42,6 @@ class Products extends Component {
   handleBrandClick = (brand) => {
     this.setState({ currentBrand: brand, currentPage: 1 });
   };
-
 
   render() {
     const {
@@ -63,7 +65,6 @@ class Products extends Component {
       sortBy.element,
       sortBy.order
     );
-    
 
     return (
       <div className="container-fluid">
@@ -73,7 +74,7 @@ class Products extends Component {
               {paginate(currentPage, pageSize, sortedProduct).map((product) => (
                 <div key={product.id} className="col-4">
                   <Product
-                    onProductAdd={()=>this.props.onProductadd(product)}
+                    onProductAdd={() => this.props.onProductadd(product)}
                     product={product}
                   />
                 </div>
@@ -81,6 +82,9 @@ class Products extends Component {
             </div>
           </div>
           <div className="col-3">
+            <Link to="/admin-products" className="btn btn-primary mx-1">Products</Link>
+            <Link to="/admin-brands" className="btn btn-primary mx-1">Brands</Link>
+            <Link to="/admin-categories" className="btn btn-primary mx-1">Categories</Link>
             {/* <div>
               <SortBy />
             </div> */}

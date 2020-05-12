@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "./../common/input";
 import { register } from "../../servicies/usersService";
 import Form from "./../common/form";
 import Joi from "joi-browser";
@@ -21,9 +20,7 @@ class Register extends Form {
     try {
       const { data } = this.state;
       await register(this.state.data);
-      const response = await login(data.email, data.password);
-      const jwt = response.data.access_token;
-      localStorage.setItem("token", jwt);
+      await login(data.email, data.password);
       window.location = "/";
     } catch (ex) {
       if (ex.respone && ex.respone.status === 400) {

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import getCategories from "../../servicies/categoriesService";
+import {getCategories} from "../../servicies/categoriesService";
 
 class Categories extends Component {
   state = {
-    categories: ["All Categories", "Odd Categories", "Even categories"],
+    categories: ["All Categories"],
   };
 
-  // async componentDidMount() {
-  //   const categories = ["All Categories"];
-  //   const { data } = await getCategoris();;
-  //   for (let category of categories) categories.push(category);
-  //   this.setState({ categories });
-  // }
+  async componentDidMount() {
+    const categories = ["All Categories"];
+    const response = await getCategories();
+    for (let category of response.data.data) categories.push(category.category_name);
+    this.setState({ categories });
+  }
   render() {
     const { categories } = this.state;
     const { onCategoryClick, currentCategory } = this.props;

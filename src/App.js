@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import jwtDecode from "jwt-decode";
 import Products from "./components/products/products";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
@@ -13,17 +12,14 @@ import AddProduct from "./components/products/add-product";
 import AddBrand from "./components/brands/add-brand";
 import AddCategory from "./components/categories/add-category";
 import Logout from './components/authentication/logout';
+import { getCurrentUser } from './servicies/authService';
 
 class App extends Component {
   state = { products: [] };
 
   componentDidMount() {
-    try {
-      const jwt = localStorage.getItem("token");
-      const user = jwtDecode(jwt);
-      console.log(user);
-      this.setState({ user });
-    } catch (ex) {}
+    const user = getCurrentUser()
+    this.setState({ user });
   }
 
   handleProductAdd = (product) => {
@@ -66,9 +62,9 @@ class App extends Component {
               )}
             />
             <Route path="/notFound" exact component={NotFound} />
-            <Route path="/add/product" exact component={AddProduct} />
-            <Route path="/add/brand" exact component={AddBrand} />
-            <Route path="/add/category" exact component={AddCategory} />
+            <Route path="/admin-products" exact component={AddProduct} />
+            <Route path="/admin-brands" exact component={AddBrand} />
+            <Route path="/admin-categories" exact component={AddCategory} />
             <Route path="/login" exact component={LogIn} />
             <Route path="/logout" exact component={Logout} />
             <Route path="/register" exact component={Register} />
