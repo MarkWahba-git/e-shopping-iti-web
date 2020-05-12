@@ -1,5 +1,5 @@
 import http from "./httpService";
-import  axios  from 'axios';
+import axios from "axios";
 
 export function getBrands() {
   return http.get("https://e-shopping-iti.herokuapp.com/v1/brands");
@@ -12,7 +12,7 @@ export function addBrand(brand) {
 }
 
 export function deleteBrand(brandID) {
-  return axios.delete(
-    `https://e-shopping-iti.herokuapp.com/v1/brands/${brandID}`
-  );
+  const apiEndpoint = `https://e-shopping-iti.herokuapp.com/v1/brands/${brandID}`;
+  const config  = {}
+  return axios.delete(apiEndpoint, );
 }

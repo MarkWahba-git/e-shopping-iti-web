@@ -3,8 +3,6 @@ import { getJwt } from "./authService";
 
 axios.defaults.headers.Authorization  = `Bearer ${getJwt()}`;
 
-
-
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&

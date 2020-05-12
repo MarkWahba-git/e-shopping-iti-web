@@ -62,6 +62,7 @@ class App extends Component {
               )}
             />
             <Route path="/notFound" exact component={NotFound} />
+            <Route path="/static" exact component={Static} />
             <Route path="/admin-products" exact component={AdminProduct} />
             <Route path="/admin-brands" exact component={AdminBrand} />
             <Route path="/admin-categories" exact component={AdminCategory} />
