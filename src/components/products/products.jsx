@@ -4,18 +4,25 @@ import Pagination from "../pagination";
 import { paginate } from "../../utils/paginate";
 import Categories from "../categories/categories";
 import Brands from "../brands/brands";
-import Search from "../search";
 import { productFilter } from "../../utils/filter-product";
-import { getZ } from "../../servicies/productsService";
+import { getProducts } from "../../servicies/productsService";
 import { sortProducts } from "../../utils/sortProducts";
-import SortBy from "../sortby";
-import http from "../../servicies/httpService";
 import { Link } from "react-router-dom";
 
 
 class Products extends Component {
   state = {
-    products: [],
+    products: [{
+      id:"1",
+      title: "adidas",
+      description: "some description",
+      image: "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
+      price: "123",
+      instock: "123",
+      category: "All Categories",
+      brand: "All Brands"
+      
+    }],
     pageSize: 6,
     currentPage: 1,
     currentCategory: "All Categories",
@@ -23,12 +30,12 @@ class Products extends Component {
     sortBy: { element: "Title", order: "asc" },
   };
 
-  async componentDidMount() {
-    const { data: products } = await getZ();
-    console.log("getting the products from the server", products);
+  // async componentDidMount() {
+  //   const { data: products } = await getProducts();
+  //   console.log("getting the products from the server", products);
 
-    this.setState({ products });
-  }
+  //   this.setState({ products });
+  // }
 
   handlePageChannge = (page) => {
     this.setState({ currentPage: page });

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { getJwt } from "./authService";
 
-axios.defaults.headers.Authorization  = `Bearer ${getJwt()}`;
+function setJwt(jwt) {
+  axios.defaults.headers.Authorization = `Bearer ${jwt}`;
+}
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -21,4 +22,5 @@ export default {
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
+  setJwt,
 };

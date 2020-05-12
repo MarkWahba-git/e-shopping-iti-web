@@ -3,6 +3,7 @@ import {getBrands,addBrand,deleteBrand,}
 from "./../../servicies/brandsService";
 import Form from "./../common/form";
 import Joi from "joi-browser";
+import { Link } from 'react-router-dom';
 
 class AdminBrand extends Form {
   state = { data: { brand: "" }, errors: {}, brands: [] };
@@ -36,7 +37,7 @@ class AdminBrand extends Form {
     const response = await getBrands();
 
     for (let brand of response.data.data) brands.push(brand);
-    this.setState({ brands });    
+    this.setState({ brands });        
   }
 
   render() {
@@ -52,6 +53,7 @@ class AdminBrand extends Form {
             <tr>
               <th scope="col">Brands</th>
               <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +67,11 @@ class AdminBrand extends Form {
                   >
                     Delete
                   </a>
+                </td>
+                <td>
+                  <Link to={`edit-brand/${brand.id}`} className="btn btn-warning">
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

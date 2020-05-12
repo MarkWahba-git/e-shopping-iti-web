@@ -17,7 +17,7 @@ class ShoppingCart extends Component {
                 <div className="container">
                   <div className="row">
                     <div key={product.id} className="card-text col-9">
-                      {product.Title}
+                      {product.title}
                     </div>
                     <div className="col-2">
                       {product.count} x {product.price}

@@ -3,6 +3,9 @@ import jwtDecode from "jwt-decode";
 
 const tokenKey = "token";
 
+http.setJwt(getJwt());
+
+
 const apiEndpoint = "https://e-shopping-iti.herokuapp.com/auth/login";
 
 export async function login(email, password) {
