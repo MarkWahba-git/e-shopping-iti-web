@@ -13,6 +13,7 @@ import AdminBrand from "./components/brands/admin-brand";
 import AdminCategory from "./components/categories/admin-category";
 import Logout from './components/authentication/logout';
 import { getCurrentUser } from './servicies/authService';
+import Staic from './components/static';
 
 class App extends Component {
   state = { products: [] };
@@ -27,54 +28,54 @@ class App extends Component {
 
     this.setState({ products });
   };
-
+  
   handleClearCart = () => {
     let products = [];
     this.setState({ products });
   };
-
+  
   render() {
     return (
-      <React.Fragment>
-        <Navbar
-          productsCount={this.state.products.length}
-          user={this.state.user}
-        />
-        <Header />
-        <div className="content">
-          <Switch>
-            <Route
-              path="/cart"
-              exact
-              render={(props) => (
-                <ShoppingCart
-                  {...props}
-                  products={this.state.products}
-                  onClearCart={this.handleClearCart}
-                />
-              )}
-            />
-            <Route
-              path="/products"
-              exact
-              render={(props) => (
-                <Products {...props} onProductadd={this.handleProductAdd} />
-              )}
-            />
-            <Route path="/notFound" exact component={NotFound} />
-            <Route path="/static" exact component={Static} />
-            <Route path="/admin-products" exact component={AdminProduct} />
-            <Route path="/admin-brands" exact component={AdminBrand} />
-            <Route path="/admin-categories" exact component={AdminCategory} />
-            <Route path="/login" exact component={LogIn} />
-            <Route path="/logout" exact component={Logout} />
-            <Route path="/register" exact component={Register} />
-            <Redirect from="/" to="/products" />
-            <Redirect to="/notFound" />
-          </Switch>
-        </div>
-        <Footer />
-      </React.Fragment>
+      <Route path="/static" exact component={Staic} />
+      // <React.Fragment>
+      //   <Navbar
+      //     productsCount={this.state.products.length}
+      //     user={this.state.user}
+      //   />
+      //   <Header />
+      //   <div className="content">
+      //     <Switch>
+      //       <Route
+      //         path="/cart"
+      //         exact
+      //         render={(props) => (
+      //           <ShoppingCart
+      //             {...props}
+      //             products={this.state.products}
+      //             onClearCart={this.handleClearCart}
+      //           />
+      //         )}
+      //       />
+      //       <Route
+      //         path="/products"
+      //         exact
+      //         render={(props) => (
+      //           <Products {...props} onProductadd={this.handleProductAdd} />
+      //         )}
+      //       />
+      //       <Route path="/notFound" exact component={NotFound} />
+      //       <Route path="/admin-products" exact component={AdminProduct} />
+      //       <Route path="/admin-brands" exact component={AdminBrand} />
+      //       <Route path="/admin-categories" exact component={AdminCategory} />
+      //       <Route path="/login" exact component={LogIn} />
+      //       <Route path="/logout" exact component={Logout} />
+      //       <Route path="/register" exact component={Register} />
+      //       <Redirect from="/" to="/products" />
+      //       <Redirect to="/notFound" />
+      //     </Switch>
+      //   </div>
+      //   <Footer />
+      // </React.Fragment>
     );
   }
 }
