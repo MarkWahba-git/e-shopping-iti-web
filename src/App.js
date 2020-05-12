@@ -8,9 +8,9 @@ import ShoppingCart from "./components/shopping-cart";
 import NotFound from "./components/not-found";
 import LogIn from "./components/authentication/login";
 import Register from "./components/authentication/register";
-import AddProduct from "./components/products/add-product";
-import AddBrand from "./components/brands/add-brand";
-import AddCategory from "./components/categories/add-category";
+import AdminProduct from "./components/products/admin-product";
+import AdminBrand from "./components/brands/admin-brand";
+import AdminCategory from "./components/categories/admin-category";
 import Logout from './components/authentication/logout';
 import { getCurrentUser } from './servicies/authService';
 
@@ -62,9 +62,9 @@ class App extends Component {
               )}
             />
             <Route path="/notFound" exact component={NotFound} />
-            <Route path="/admin-products" exact component={AddProduct} />
-            <Route path="/admin-brands" exact component={AddBrand} />
-            <Route path="/admin-categories" exact component={AddCategory} />
+            <Route path="/admin-products" exact component={AdminProduct} />
+            <Route path="/admin-brands" exact component={AdminBrand} />
+            <Route path="/admin-categories" exact component={AdminCategory} />
             <Route path="/login" exact component={LogIn} />
             <Route path="/logout" exact component={Logout} />
             <Route path="/register" exact component={Register} />

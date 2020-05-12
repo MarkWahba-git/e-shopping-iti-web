@@ -1,8 +1,8 @@
 import React from "react";
-import Form from "./../common/form";
+import Form from "../common/form";
 import Joi from "joi-browser";
 
-class AddCategory extends Form {
+class AdminCategory extends Form {
   state = { data: { category: "" }, errors: {} };
 
   schema = {
@@ -26,4 +26,4 @@ class AddCategory extends Form {
   }
 }
 
-export default AddCategory;
+export default AdminCategory;

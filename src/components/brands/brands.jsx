@@ -11,7 +11,8 @@ class Brands extends Component {
   async componentDidMount() {
     const brands = ["All Brands"];
     const response = await getBrands();
-    for (let brand of response.data.data) brands.push(brand.brand_name);    
+    for (let brand of response.data.data) brands.push(brand.brand_name);
+    
     this.setState({ brands });
   }
 

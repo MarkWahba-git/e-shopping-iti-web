@@ -82,9 +82,9 @@ class Products extends Component {
             </div>
           </div>
           <div className="col-3">
-            <Link to="/admin-products" className="btn btn-primary mx-1">Products</Link>
-            <Link to="/admin-brands" className="btn btn-primary mx-1">Brands</Link>
-            <Link to="/admin-categories" className="btn btn-primary mx-1">Categories</Link>
+            <Link to="/admin-products" className="btn btn-primary m-2">Products</Link>
+            <Link to="/admin-brands" className="btn btn-primary m-2">Brands</Link>
+            <Link to="/admin-categories" className="btn btn-primary m-2">Categories</Link>
             {/* <div>
               <SortBy />
             </div> */}
