@@ -1,11 +1,7 @@
 import http from "./httpService";
 
+const apiEndpoint = "https://e-shopping-iti.herokuapp.com/auth/register";
+
 export function register(user) {
-    console.log(user);
-    
-  return http.post("https://e-shopping-iti.herokuapp.com/auth/register", {
-    email: user.email,
-    password: user.password,
-    name: user.username,
-  });
+  return http.post(apiEndpoint, user);
 }

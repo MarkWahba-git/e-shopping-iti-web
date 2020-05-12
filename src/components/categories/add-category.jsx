@@ -1,10 +1,29 @@
-import React, { Component } from 'react';
+import React from "react";
+import Form from "./../common/form";
+import Joi from "joi-browser";
 
-class AddCategory extends Component {
-    state = {  }
-    render() { 
-        return ( <h1>Add Category</h1> );
-    }
+class AddCategory extends Form {
+  state = { data: { category: "" }, errors: {} };
+
+  schema = {
+    category: Joi.string().required().label("Category"),
+  };
+
+  doSubmit = () => {
+    //call the server
+    console.log("Submitted");
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("category", "Category")}
+          {this.renderButton("Add")}
+        </form>
+      </div>
+    );
+  }
 }
- 
+
 export default AddCategory;

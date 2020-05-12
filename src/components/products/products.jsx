@@ -81,9 +81,9 @@ class Products extends Component {
             </div>
           </div>
           <div className="col-3">
-            <div>
+            {/* <div>
               <SortBy />
-            </div>
+            </div> */}
             <div className="my-4">
               {" "}
               <Categories

@@ -3,10 +3,11 @@ import Input from "./../common/input";
 import { register } from "../../servicies/usersService";
 import Form from "./../common/form";
 import Joi from "joi-browser";
+import { login } from "./../../servicies/authService";
 
 class Register extends Form {
   state = {
-    data: { name: "", email: "", password: "", confirmPassword:"" },
+    data: { name: "", email: "", password: "" },
     errors: {},
   };
 
@@ -14,13 +15,24 @@ class Register extends Form {
     name: Joi.string().required().label("Username"),
     email: Joi.string().required().label("email"),
     password: Joi.string().required().min(5).label("Password"),
-    confirmPassword: Joi.string().required().label("ConfirmPassword"),
   };
 
-  doSubmit(){
-    console.log("registerd");
-    
-  }
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      await register(this.state.data);
+      const response = await login(data.email, data.password);
+      const jwt = response.data.access_token;
+      localStorage.setItem("token", jwt);
+      window.location = "/";
+    } catch (ex) {
+      if (ex.respone && ex.respone.status === 400) {
+        const errors = { ...this.status.errors };
+        errors.email = ex.respone.data;
+        this.setState({ errors });
+      }
+    }
+  };
 
   render() {
     const { data, errors } = this.state;
@@ -30,7 +42,6 @@ class Register extends Form {
           {this.renderInput("name", "UserName")}
           {this.renderInput("email", "Email", "email")}
           {this.renderInput("password", "Password", "password")}
-          {this.renderInput("confirmPassword", "Confirm Password", "password")}
           {this.renderButton("Register")}
         </form>
       </div>
