@@ -23,9 +23,6 @@ class Product extends Component {
           >
             Add
           </a>
-          <a href="#" className="btn btn-danger mx-1">
-            Del
-          </a>
         </div>
       </div>
     );

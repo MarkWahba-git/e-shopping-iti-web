@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getBrands, addBrand } from "./../../servicies/brandsService";
+import {getBrands,addBrand,deleteBrand,}
+from "./../../servicies/brandsService";
 import Form from "./../common/form";
 import Joi from "joi-browser";
 
@@ -13,26 +14,29 @@ class AdminBrand extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      await addBrand(data);
+      await addBrand(data.brand);
       window.location = "/admin-brands";
-
-      // const oldBrands = this.state.brands;
-      // this.setState({brands:[...oldBrands]})
     } catch (ex) {
       if (ex.respone && ex.respone.status === 400) {
         const errors = { ...this.status.errors };
-        errors.email = ex.respone.data;
+        errors.brand = ex.respone.data;
         this.setState({ errors });
       }
     }
   };
 
+  handleDelete = (brandID) => {
+    console.log(brandID);
+    
+    deleteBrand(brandID);
+  };
+
   async componentDidMount() {
     const brands = [];
     const response = await getBrands();
-    for (let brand of response.data.data) brands.push(brand.brand_name);
-    this.setState({ brands });
-    console.log(brands);
+
+    for (let brand of response.data.data) brands.push(brand);
+    this.setState({ brands });    
   }
 
   render() {
@@ -52,11 +56,15 @@ class AdminBrand extends Form {
           </thead>
           <tbody>
             {this.state.brands.map((brand) => (
-              <tr>
-                <td>{brand}</td>
-
+              <tr key={brand.id}>
+                <td>{brand.brand_name}</td>
                 <td>
-                  <a className="btn btn-danger">Delete</a>
+                  <a
+                    onClick={() => this.handleDelete(brand.id)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </a>
                 </td>
               </tr>
             ))}
