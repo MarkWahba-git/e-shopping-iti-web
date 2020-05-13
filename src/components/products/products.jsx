@@ -8,6 +8,7 @@ import { productFilter } from "../../utils/filter-product";
 import { getProducts } from "../../servicies/productsService";
 import { sortProducts } from "../../utils/sortProducts";
 import { Link } from "react-router-dom";
+import { searchProducts } from "./../../utils/searchProduct";
 
 class Products extends Component {
   state = {
@@ -17,15 +18,13 @@ class Products extends Component {
     currentCategory: "All Categories",
     currentBrand: "All Brands",
     sortBy: { element: "Title", order: "asc" },
+    searchQuery: "",
   };
 
   async componentDidMount() {
     const { data: products } = await getProducts();
-    console.log(products);
-    
+
     for (let product of products) {
-      // if (!product.category) product.category = "All Categories";
-      // if (!product.brand) product.brand = "All Brands";
       if (!product.description) product.description = "Trail Desc";
       if (!product.price) product.price = 123;
       if (!product.title) product.title = "Trail Title";
@@ -57,6 +56,7 @@ class Products extends Component {
       currentCategory,
       currentBrand,
       sortBy,
+      searchQuery,
     } = this.state;
 
     const filterdProducts = productFilter(
@@ -71,6 +71,8 @@ class Products extends Component {
       sortBy.element,
       sortBy.order
     );
+
+    const serchProduct = searchProducts(sortedProduct, searchQuery);
 
     return (
       <div className="container-fluid">
@@ -96,6 +98,9 @@ class Products extends Component {
             </Link>
             <Link to="/admin-categories" className="btn btn-primary m-2">
               Categories
+            </Link>
+            <Link to="/admin-orders" className="btn btn-primary m-2">
+              orders
             </Link>
             {/* <div>
               <SortBy />

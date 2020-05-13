@@ -1,4 +1,6 @@
 export function productFilter(products, category, brand) {
+
+
   if (category === "All Categories" && brand === "All Brands") {
     return products;
   } else if (category === "All Categories")

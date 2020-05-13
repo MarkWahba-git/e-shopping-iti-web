@@ -28,7 +28,7 @@ class Navbar extends Component {
           )}
           {user && (
             <React.Fragment>
-          <NavLink to="/" className="navbar-brand">
+          <NavLink to="/products" className="navbar-brand">
             Home
           </NavLink>
               <Search />
