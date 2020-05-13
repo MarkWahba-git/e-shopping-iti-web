@@ -13,7 +13,6 @@ class Product extends Component {
   render() {
 
     const { product, onProductAdd } = this.props;
-    console.log(product);
     
     return (
       <div className="card ml-5 mt-5" style={{ width: 250 }}>

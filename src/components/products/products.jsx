@@ -9,20 +9,9 @@ import { getProducts } from "../../servicies/productsService";
 import { sortProducts } from "../../utils/sortProducts";
 import { Link } from "react-router-dom";
 
-
 class Products extends Component {
   state = {
-    products: [{
-      id:"1",
-      title: "adidas",
-      description: "some description",
-      image: "https://homepages.cae.wisc.edu/~ece533/images/airplane.png",
-      price: "123",
-      instock: "123",
-      category: "All Categories",
-      brand: "All Brands"
-      
-    }],
+    products: [],
     pageSize: 6,
     currentPage: 1,
     currentCategory: "All Categories",
@@ -30,12 +19,17 @@ class Products extends Component {
     sortBy: { element: "Title", order: "asc" },
   };
 
-  // async componentDidMount() {
-  //   const { data: products } = await getProducts();
-  //   console.log("getting the products from the server", products);
+  async componentDidMount() {
+    const { data: products } = await getProducts();
+    for (let product of products) {
+      if (!product.category) product.category = "All Categories";
+      if (!product.brand) product.brand = "All Brands";
+      if (!product.brand) product.brand = "All Brands";
+      if (!product.img) product.image = "https://picsum.photos/200/300";
+    }
 
-  //   this.setState({ products });
-  // }
+    this.setState({ products });
+  }
 
   handlePageChannge = (page) => {
     this.setState({ currentPage: page });
@@ -89,9 +83,15 @@ class Products extends Component {
             </div>
           </div>
           <div className="col-3">
-            <Link to="/admin-products" className="btn btn-primary m-2">Products</Link>
-            <Link to="/admin-brands" className="btn btn-primary m-2">Brands</Link>
-            <Link to="/admin-categories" className="btn btn-primary m-2">Categories</Link>
+            <Link to="/admin-products" className="btn btn-primary m-2">
+              Products
+            </Link>
+            <Link to="/admin-brands" className="btn btn-primary m-2">
+              Brands
+            </Link>
+            <Link to="/admin-categories" className="btn btn-primary m-2">
+              Categories
+            </Link>
             {/* <div>
               <SortBy />
             </div> */}

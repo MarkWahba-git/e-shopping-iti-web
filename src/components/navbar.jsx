@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 class Navbar extends Component {
   state = {};
   render() {
-    const { user } = this.props;
+    const { user } = this.props;    
     return (
       <React.Fragment>
         <nav className="navbar navbar-light bg-light">

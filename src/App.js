@@ -14,19 +14,22 @@ import AdminCategory from "./components/categories/admin-category";
 import Logout from "./components/authentication/logout";
 import { getCurrentUser } from "./servicies/authService";
 import { getProducts } from "./servicies/productsService";
-import EditCategory from './components/categories/editCategory';
-import EditBrand from './components/brands/editBrand';
-import AddProduct from './components/products/add-product';
+import EditCategory from "./components/categories/editCategory";
+import EditBrand from "./components/brands/editBrand";
+import AddProduct from "./components/products/add-product";
+import { getUser } from "./servicies/usersService";
 
 class App extends Component {
   state = { products: [] };
 
   async componentDidMount() {
     const user = getCurrentUser();
-    this.setState({ user });
+    const userInfo = await getUser(user.user_id);
+    console.log("userInfo", userInfo.name);
+
+    this.setState({ user, userInfo });
     const { data: products } = await getProducts();
     this.setState({ products });
-    console.log("getting the products from the server", products);
   }
 
   handleProductAdd = (product) => {
@@ -41,10 +44,14 @@ class App extends Component {
   };
 
   render() {
-    const { products, user } = this.state;
+    const { products, user, userInfo } = this.state;
     return (
       <React.Fragment>
-        <Navbar productsCount={products.length} user={user} />
+        <Navbar
+          productsCount={products.length}
+          user={user}
+          username={userInfo}
+        />
         <Header />
         <div className="content">
           <Switch>
