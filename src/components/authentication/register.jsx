@@ -21,7 +21,7 @@ class Register extends Form {
       const { data } = this.state;
       await register(this.state.data);
       await login(data.email, data.password);
-      window.location = "/";
+      window.location = "/products";
     } catch (ex) {
       if (ex.respone && ex.respone.status === 400) {
         const errors = { ...this.status.errors };

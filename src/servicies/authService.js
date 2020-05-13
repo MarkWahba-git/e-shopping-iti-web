@@ -1,10 +1,10 @@
 import http from "./httpService";
 import jwtDecode from "jwt-decode";
+import { getUser } from "./usersService";
 
 const tokenKey = "token";
 
 http.setJwt(getJwt());
-
 
 const apiEndpoint = "https://e-shopping-iti.herokuapp.com/auth/login";
 
@@ -29,4 +29,10 @@ export function getCurrentUser() {
 
 export function getJwt() {
   return localStorage.getItem(tokenKey);
+}
+
+export async function isAdmin() {
+  const userID = getCurrentUser().user_id;
+  const user = await getUser(userID);
+  return user.is_Admin;
 }

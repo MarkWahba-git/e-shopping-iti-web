@@ -40,7 +40,15 @@ class AdminOrder extends Component {
                 <td>{order.buyer_id}</td>
                 <td>{order.order_status}</td>
                 <td>{order.order_total_price}</td>
-                <td>{order.created_at}</td>
+                <td>
+
+                  <Link
+                    to={`order/${order.id}`}
+                    className="btn btn-primary"
+                  >
+                    Details
+                  </Link>
+                </td>
                 <td>
                   <Link
                     to={`delete-order/${order.id}`}

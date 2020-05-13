@@ -17,3 +17,7 @@ export function deleteOrder(orderID) {
 export function editOrder(orderID, newOrder) {
   return http.put(`${apiEndpoint}/${orderID}`, newOrder);
 }
+
+export function getOrderDetails(orderID){
+    return http.get(`${apiEndpoint}/${orderID}/line_items`)
+}

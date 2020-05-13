@@ -12,3 +12,5 @@ export async function getUser(id) {
   );
   return data.data.find((user) => user.id === id);
 }
+
+

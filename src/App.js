@@ -13,12 +13,13 @@ import AdminBrand from "./components/brands/admin-brand";
 import AdminCategory from "./components/categories/admin-category";
 import Logout from "./components/authentication/logout";
 import { getCurrentUser } from "./servicies/authService";
-import { getProducts } from "./servicies/productsService";
 import EditCategory from "./components/categories/editCategory";
 import EditBrand from "./components/brands/editBrand";
 import AddProduct from "./components/products/add-product";
-import { getUser } from "./servicies/usersService";
 import OrderAdmin from './components/orders/admin-order';
+import OrderDetails from './components/orders/order-details';
+import AdminRoute from './components/common/adminRoute';
+import ProtectedRoute from './components/common/protectedRoute';
 
 class App extends Component {
   state = { products: [], user: {} };
@@ -72,13 +73,14 @@ class App extends Component {
                 <Products {...props} onProductadd={this.handleProductAdd} />
               )}
             />
-            <Route path="/admin-products" exact component={AdminProduct} />
-            <Route path="/admin-orders" exact component={OrderAdmin} />
-            <Route path="/add-product" exact component={AddProduct} />
-            <Route path="/admin-brands" exact component={AdminBrand} />
-            <Route path="/edit-category/:id" exact component={EditCategory} />
-            <Route path="/edit-brand/:id" exact component={EditBrand} />
-            <Route path="/admin-categories" exact component={AdminCategory} />
+            <ProtectedRoute path="/admin-products"  component={AdminProduct} />
+            <ProtectedRoute path="/admin-orders"  component={OrderAdmin} />
+            <ProtectedRoute path="/order/:id"  component={OrderDetails} />
+            <ProtectedRoute path="/add-product"  component={AddProduct} />
+            <ProtectedRoute path="/admin-brands"  component={AdminBrand} />
+            <ProtectedRoute path="/edit-category/:id"  component={EditCategory} />
+            <ProtectedRoute path="/edit-brand/:id"  component={EditBrand} />
+            <ProtectedRoute path="/admin-categories"  component={AdminCategory} />
 
             <Redirect from="/" to="/login" />
             <Redirect to="/notFound" />

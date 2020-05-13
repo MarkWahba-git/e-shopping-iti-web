@@ -9,6 +9,7 @@ import { getProducts } from "../../servicies/productsService";
 import { sortProducts } from "../../utils/sortProducts";
 import { Link } from "react-router-dom";
 import { searchProducts } from "./../../utils/searchProduct";
+import { isAdmin } from "./../../servicies/authService";
 
 class Products extends Component {
   state = {
@@ -19,20 +20,14 @@ class Products extends Component {
     currentBrand: "All Brands",
     sortBy: { element: "Title", order: "asc" },
     searchQuery: "",
+    is_admin: 0,
   };
 
   async componentDidMount() {
     const { data: products } = await getProducts();
-
-    for (let product of products) {
-      if (!product.description) product.description = "Trail Desc";
-      if (!product.price) product.price = 123;
-      if (!product.title) product.title = "Trail Title";
-      if (!product.instock) product.instock = 123;
-      if (!product.image) product.image = "https://picsum.photos/200/300";
-    }
-
     this.setState({ products });
+    const is_admin = await isAdmin();
+    this.setState({ is_admin });
   }
 
   handlePageChannge = (page) => {
@@ -57,6 +52,7 @@ class Products extends Component {
       currentBrand,
       sortBy,
       searchQuery,
+      is_admin,
     } = this.state;
 
     const filterdProducts = productFilter(
@@ -90,18 +86,24 @@ class Products extends Component {
             </div>
           </div>
           <div className="col-3">
-            <Link to="/admin-products" className="btn btn-primary m-2">
-              Products
-            </Link>
-            <Link to="/admin-brands" className="btn btn-primary m-2">
-              Brands
-            </Link>
-            <Link to="/admin-categories" className="btn btn-primary m-2">
-              Categories
-            </Link>
-            <Link to="/admin-orders" className="btn btn-primary m-2">
-              orders
-            </Link>
+            {is_admin==1 ?(
+
+              <React.Fragment>
+                <Link to="/admin-products" className="btn btn-primary m-2">
+                  Products
+                </Link>
+                <Link to="/admin-brands" className="btn btn-primary m-2">
+                  Brands
+                </Link>
+                <Link to="/admin-categories" className="btn btn-primary m-2">
+                  Categories
+                </Link>
+                <Link to="/admin-orders" className="btn btn-primary m-2">
+                  orders
+                </Link>
+              </React.Fragment>
+              ):""
+            }
             {/* <div>
               <SortBy />
             </div> */}

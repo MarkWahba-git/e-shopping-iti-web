@@ -8,10 +8,11 @@ class ShoppingCart extends Component {
   handleCheckOut = async (products) => {
     
     const line_items = [];
-    for (let product of products) {
+    const finalOrder = this.handleProductRepetition(products)
+    for (let item of finalOrder) {
       line_items.push({
-        product_name: product.title,
-        product_qty: product.count,
+        product_name: item.title,
+        product_qty: item.count,
       });
     }
     
@@ -21,9 +22,8 @@ class ShoppingCart extends Component {
       order_total_price: this.getTotalPrice(products),
       line_items: line_items,
     };
-    console.log(order);
-    const response = await addOrder(order);
-    console.log(response);
+    await addOrder(order);
+    window.location="/products"
   };
 
   componentDidMount() {
@@ -32,7 +32,9 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    
     const { products, onClearCart } = this.props;
+    console.log(products);
     return (
       <div className="container">
         <div className="card">
@@ -40,9 +42,9 @@ class ShoppingCart extends Component {
           <div className="card-body">
             {products.length ? (
               this.handleProductRepetition(products).map((product) => (
-                <div className="container">
+                <div key={product.id} className="container">
                   <div className="row">
-                    <div key={product.id} className="card-text col-9">
+                    <div  className="card-text col-9">
                       {product.title}
                     </div>
                     <div className="col-2">
@@ -87,6 +89,8 @@ class ShoppingCart extends Component {
         order.push(product);
       } else product.count += 1;
     });
+    console.log("order", order);
+    
     return order;
   }
 
