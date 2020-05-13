@@ -13,7 +13,7 @@ class Product extends Component {
   render() {
 
     const { product, onProductAdd } = this.props;
-    
+  
     return (
       <div className="card ml-5 mt-5" style={{ width: 250 }}>
         <img
@@ -22,7 +22,7 @@ class Product extends Component {
           alt="Card image cap"
         />
         <div className="card-body">
-          <h5 className="card-title">{product.Title}</h5>
+          <h5 className="card-title">{product.title}</h5>
           <p className="card-text">
             {product.description}
           </p>

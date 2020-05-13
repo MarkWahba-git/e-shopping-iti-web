@@ -21,11 +21,16 @@ class Products extends Component {
 
   async componentDidMount() {
     const { data: products } = await getProducts();
+    console.log(products);
+    
     for (let product of products) {
-      if (!product.category) product.category = "All Categories";
-      if (!product.brand) product.brand = "All Brands";
-      if (!product.brand) product.brand = "All Brands";
-      if (!product.img) product.image = "https://picsum.photos/200/300";
+      // if (!product.category) product.category = "All Categories";
+      // if (!product.brand) product.brand = "All Brands";
+      if (!product.description) product.description = "Trail Desc";
+      if (!product.price) product.price = 123;
+      if (!product.title) product.title = "Trail Title";
+      if (!product.instock) product.instock = 123;
+      if (!product.image) product.image = "https://picsum.photos/200/300";
     }
 
     this.setState({ products });

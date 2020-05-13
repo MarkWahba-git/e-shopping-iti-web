@@ -13,11 +13,7 @@ export function addBrand(brand) {
 }
 
 export function deleteBrand(brandID) {
-  const apiEndpoint = `${apiEndpoint}/${brandID}`;
-  console.log(apiEndpoint);
-
-  const config = {};
-  return http.delete(apiEndpoint, {});
+  return http.delete(`${apiEndpoint}/${brandID}`);
 }
 
 export function editBrand(brandID, newBrand) {

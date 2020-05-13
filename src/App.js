@@ -20,21 +20,18 @@ import AddProduct from "./components/products/add-product";
 import { getUser } from "./servicies/usersService";
 
 class App extends Component {
-  state = { products: [] };
+  state = { products: [], user: {} };
 
   async componentDidMount() {
     const user = getCurrentUser();
-    const userInfo = await getUser(user.user_id);
-    console.log("userInfo", userInfo.name);
+    // const userInfo = await getUser(user.user_id);
+    // console.log("userInfo", userInfo.name);
 
-    this.setState({ user, userInfo });
-    const { data: products } = await getProducts();
-    this.setState({ products });
+    this.setState({ user });
   }
 
   handleProductAdd = (product) => {
     let products = [...this.state.products, product];
-
     this.setState({ products });
   };
 
@@ -43,15 +40,11 @@ class App extends Component {
     this.setState({ products });
   };
 
-  render() {
-    const { products, user, userInfo } = this.state;
+  render() {    
+    const { products, user } = this.state;
     return (
       <React.Fragment>
-        <Navbar
-          productsCount={products.length}
-          user={user}
-          username={userInfo}
-        />
+        <Navbar productsCount={products.length} user={user} />
         <Header />
         <div className="content">
           <Switch>
@@ -66,6 +59,7 @@ class App extends Component {
                 />
               )}
             />
+            <Route path="/notFound" exact component={NotFound} />
             <Route
               path="/products"
               exact
@@ -73,14 +67,7 @@ class App extends Component {
                 <Products {...props} onProductadd={this.handleProductAdd} />
               )}
             />
-            <Route path="/notFound" exact component={NotFound} />
-            <Route
-              path="/admin-products"
-              exact
-              render={(props) => (
-                <AdminProduct {...props} products={products} />
-              )}
-            />
+            <Route path="/admin-products" exact component={AdminProduct} />
             <Route path="/add-product" exact component={AddProduct} />
             <Route path="/admin-brands" exact component={AdminBrand} />
             <Route path="/edit-category/:id" exact component={EditCategory} />
@@ -89,7 +76,7 @@ class App extends Component {
             <Route path="/login" exact component={LogIn} />
             <Route path="/logout" exact component={Logout} />
             <Route path="/register" exact component={Register} />
-            <Redirect from="/" to="/products" />
+            {/* <Redirect from="/" to="/products" /> */}
             <Redirect to="/notFound" />
           </Switch>
         </div>
