@@ -1,10 +1,36 @@
 import React, { Component } from "react";
+import { getCurrentUser } from "./../servicies/authService";
+import { addOrder } from "../servicies/ordersService";
 
 class ShoppingCart extends Component {
-  state = {};
-  handleCheckOut = (products) => {
-    console.log(products);
+  state = { userID: "" };
+
+  handleCheckOut = async (products) => {
+    
+    const line_items = [];
+    for (let product of products) {
+      line_items.push({
+        product_name: product.title,
+        product_qty: product.count,
+      });
+    }
+    
+    const order = {
+      buyer_id: this.state.userID.user_id,
+      order_status: "Pending admin Approval",
+      order_total_price: this.getTotalPrice(products),
+      line_items: line_items,
+    };
+    console.log(order);
+    const response = await addOrder(order);
+    console.log(response);
   };
+
+  componentDidMount() {
+    const userID = getCurrentUser();
+    this.setState({ userID });
+  }
+
   render() {
     const { products, onClearCart } = this.props;
     return (

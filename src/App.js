@@ -18,6 +18,7 @@ import EditCategory from "./components/categories/editCategory";
 import EditBrand from "./components/brands/editBrand";
 import AddProduct from "./components/products/add-product";
 import { getUser } from "./servicies/usersService";
+import OrderAdmin from './components/orders/admin-order';
 
 class App extends Component {
   state = { products: [], user: {} };
@@ -40,7 +41,7 @@ class App extends Component {
     this.setState({ products });
   };
 
-  render() {    
+  render() {
     const { products, user } = this.state;
     return (
       <React.Fragment>
@@ -48,6 +49,11 @@ class App extends Component {
         <Header />
         <div className="content">
           <Switch>
+            <Route path="/notFound" exact component={NotFound} />
+            <Route path="/login" exact component={LogIn} />
+            <Route path="/logout" exact component={Logout} />
+            <Route path="/register" exact component={Register} />
+
             <Route
               path="/cart"
               exact
@@ -59,7 +65,6 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/notFound" exact component={NotFound} />
             <Route
               path="/products"
               exact
@@ -68,15 +73,14 @@ class App extends Component {
               )}
             />
             <Route path="/admin-products" exact component={AdminProduct} />
+            <Route path="/admin-orders" exact component={OrderAdmin} />
             <Route path="/add-product" exact component={AddProduct} />
             <Route path="/admin-brands" exact component={AdminBrand} />
             <Route path="/edit-category/:id" exact component={EditCategory} />
             <Route path="/edit-brand/:id" exact component={EditBrand} />
             <Route path="/admin-categories" exact component={AdminCategory} />
-            <Route path="/login" exact component={LogIn} />
-            <Route path="/logout" exact component={Logout} />
-            <Route path="/register" exact component={Register} />
-            {/* <Redirect from="/" to="/products" /> */}
+
+            <Redirect from="/" to="/login" />
             <Redirect to="/notFound" />
           </Switch>
         </div>
